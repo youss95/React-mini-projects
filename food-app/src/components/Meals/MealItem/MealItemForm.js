@@ -1,8 +1,8 @@
 import "./MealItemForm.css";
 import Input from "../../UI/Input";
-const MealItemForm = () => {
+const MealItemForm = ({ id }) => {
   const ex = {
-    id: "amount",
+    id: `amount+${id}`,
     type: "number",
     min: "1",
     max: "5",
