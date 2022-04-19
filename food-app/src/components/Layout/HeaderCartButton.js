@@ -5,7 +5,7 @@ import "./HeaderCartButton.css";
 const HeaderCartButton = ({ showCartHandler }) => {
   const cartCtx = useContext(CartContext);
   const cartItemsNum = cartCtx.items.reduce((cur, item) => {
-    return cur + item.length;
+    return cur + item.amount;
   }, 0);
   console.log(cartCtx);
   return (
