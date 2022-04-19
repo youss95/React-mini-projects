@@ -1,7 +1,7 @@
 import "./Modal.css";
 import ReactDOM from "react-dom";
 const Backdrop = ({ showCartHandler }) => {
-  return <div className="backdrop" onClick={() => showCartHandler()}></div>;
+  return <div className="backdrop" onClick={showCartHandler}></div>;
 };
 // content
 const ModalOverlay = (props) => {
