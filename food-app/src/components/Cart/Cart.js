@@ -7,12 +7,18 @@ const Cart = ({ showCartHandler }) => {
   const cartCtx = useContext(CartContext);
   const totalAmount = `$${cartCtx.totalAmount}`;
   const hasItems = cartCtx.items.length > 0;
-  const removeHandler = (id) => {};
-  const addHandler = () => {};
+  const removeHandler = (id) => {
+    console.log("removeid", id);
+    cartCtx.removeItem(id);
+  };
+  const addHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
   const cartItems = (
     <ul className="cart-items">
       {cartCtx.items.map((item) => (
         <CartItem
+          id={item.id}
           name={item.name}
           amount={item.amount}
           price={item.price}
@@ -25,7 +31,7 @@ const Cart = ({ showCartHandler }) => {
 
   return (
     <Modal showCartHandler={showCartHandler}>
-      {cartItems}
+      {hasItems ? cartItems : <div>장바구니 비었음...</div>}
       <div className="total">
         <span>Total</span>
         <span>{totalAmount}</span>

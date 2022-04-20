@@ -1,6 +1,6 @@
 import "./CartItem.css";
 
-const CartItem = ({ name, amount, price, onRemove, onAdd }) => {
+const CartItem = ({ id, name, amount, price, onRemove, onAdd }) => {
   const itemPrice = `$${price.toFixed(2)}`;
 
   return (
@@ -14,8 +14,14 @@ const CartItem = ({ name, amount, price, onRemove, onAdd }) => {
       </div>
 
       <div className="actionss">
-        <button onClick={onRemove}>−</button>
-        <button onClick={onAdd}>+</button>
+        <button onClick={() => onRemove(id)}>−</button>
+        <button
+          onClick={() =>
+            onAdd({ id: id, name: name, amount: amount, price: price })
+          }
+        >
+          +
+        </button>
       </div>
     </li>
   );
