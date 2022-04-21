@@ -38,6 +38,7 @@
 
 .bump {
   animation: bump 300ms ease-out;
+  color: yellow;
 }
 
 @keyframes bump {
