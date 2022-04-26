@@ -1,24 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import { counterActions } from "../store/counter";
 const Counter = () => {
-  const counter = useSelector((state) => state);
+  const counter = useSelector((state) => state.counter); // state.counter.counter :  counterSlice.reducer의 initialState의 counter
+
   const dispatch = useDispatch();
 
   const increment = () => {
-    console.log("in");
-    dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
   const decrement = () => {
     console.log("de");
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
   };
 
   const increase = () => {
-    dispatch({ type: "increase", num: 5 });
+    dispatch(counterActions.increase(10)); //{type: 'something' , payload: 10}
   };
 
   const showCount = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggle());
   };
   return (
     <div>
