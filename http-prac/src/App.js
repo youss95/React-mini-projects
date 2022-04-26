@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import MoviesList from "./components/MoviesList";
 import "./App.css";
-
+import { useSelector } from "react-redux";
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,13 +70,14 @@ function App() {
   if (movies.length > 0) {
     content = <MoviesList movies={movies} />;
   }
+  //redux에서 관리되는 count 가져오기
+  const count = useSelector((state) => state.counter);
   return (
     <React.Fragment>
       <section>
-        <button onClick={fetchMovie}>Fetch Movies</button>
-        <button onClick={addHandler}>addTest</button>
+        <button>counter</button>
       </section>
-      <section>{content}</section>
+      <section>{count}</section>
     </React.Fragment>
   );
 }
