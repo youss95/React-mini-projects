@@ -18,7 +18,7 @@ const AuthForm = () => {
   useEffect(() => {
     console.log("s", tokenId);
     console.log("d", isLoggedIn);
-  });
+  }, [tokenId, isLoggedIn]);
   const submitHandler = async (event) => {
     event.preventDefault();
     const email = emailInputRef.current.value;
@@ -38,9 +38,12 @@ const AuthForm = () => {
         password: password,
         returnSecureToken: true,
       });
-      console.log("sss", authSt);
+      console.log("authSt", authSt);
       let token = authSt.data.idToken;
-      dispatch(loginTest(token));
+      const exTime = new Date(
+        new Date().getTime() + parseInt(authSt.data.expiresIn * 1000)
+      );
+      dispatch(loginTest(token, exTime.toString()));
     } catch (e) {
       let errMsg = e.response.data.error.message;
       //console.log(errMsg);

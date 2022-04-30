@@ -10,7 +10,7 @@ const MainNavigation = () => {
     dispatch(logoutTest());
   };
   useEffect(() => {
-    console.log(isLoggedIn);
+    console.log("is", isLoggedIn);
   });
   return (
     <header className={classes.header}>
