@@ -4,11 +4,16 @@ const LOGOUT = "auth/logout";
 
 const initialState = {
   token: "",
-  isLoggedIn: false,
+  isLoggedIn: !!localStorage.getItem("token"),
 };
 
-export const loginTest = createAction(LOGIN, (token) => token);
-export const logoutTest = createAction(LOGOUT);
+export const loginTest = createAction(LOGIN, (token) => {
+  localStorage.setItem("token", token);
+  return token;
+});
+export const logoutTest = createAction(LOGOUT, () => {
+  localStorage.removeItem("token");
+});
 
 const auth = handleActions(
   {
