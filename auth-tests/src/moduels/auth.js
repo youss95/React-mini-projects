@@ -30,6 +30,7 @@ const retrieveStoredToken = () => {
   };
 };
 export const logoutTest = createAction(LOGOUT, () => {
+  console.log("start");
   localStorage.removeItem("token");
   if (logoutTimer) {
     clearTimeout(logoutTimer);
