@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { selectNewDisney } from "../features/movie/movieSlice";
 
 const Container = styled.div`
   padding: 0 0 26px;
@@ -45,15 +47,20 @@ const Wrap = styled.div`
   }
 `;
 const NewDisney = () => {
+  const newDisney = useSelector(selectNewDisney);
   return (
     <Container>
       <h4>New Disney</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img src="" />
-          </Link>
-        </Wrap>
+        {newDisney &&
+          newDisney.map((newDisney, key) => (
+            <Wrap key={newDisney.id}>
+              {newDisney.id}
+              <Link to={`/detail/${newDisney.id}`}>
+                <img src={newDisney.cardImg} alt={newDisney.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );

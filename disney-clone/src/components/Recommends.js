@@ -1,5 +1,8 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { selectMovie, selectRecommend } from "../features/movie/movieSlice";
 
 const Container = styled.div`
   padding: 0 0 26px;
@@ -45,15 +48,21 @@ const Wrap = styled.div`
   }
 `;
 const Recommends = () => {
+  const movies = useSelector(selectRecommend);
+
   return (
     <Container>
-      <h4>Recoomend for you</h4>
+      <h4>Recommend For You</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img src="" />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={movie.id}>
+              {movie.id}
+              <Link to={`/detail/${movie.id}`}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
