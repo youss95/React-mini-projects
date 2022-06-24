@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
+import db from "../firebase";
 const Container = styled.div`
   position: relative;
   min-height: calc(100vh-250px);
@@ -51,22 +53,160 @@ const Controls = styled.div`
   margin: 24px 0px;
   min-height: 56px;
 `;
-const Player = styled.div``;
+const Player = styled.button`
+  font-size: 15px;
+  margin: 0px 22px 0px 0px;
+  padding: 0px 24px;
+  height: 56px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  text-transform: uppercase;
+  background-color: rgba(249, 249, 249);
+  border: none;
+  color: rgb(0, 0, 0);
+  img {
+    width: 32px;
+  }
+  &:hover {
+    background-color: rgb(198, 198, 198);
+  }
+  @media (max-width: 768px) {
+    height: 45px;
+    font-size: 14px;
+    padding: 0px 12px;
+    img {
+      width: 25px;
+    }
+  }
+`;
+const Trailer = styled(Player)`
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(249, 249, 249);
+  color: white;
+`;
+const AddList = styled.div`
+  margin-right: 16px;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  border: 2px solid black;
+  cursor: pointer;
+
+  span {
+    background-color: rgb(249, 249, 249);
+    display: inline-block;
+
+    &:first-child {
+      height: 2px;
+      transform: translate(1px, 0px) rotate(0deg);
+      width: 16px;
+    }
+
+    &:nth-child(2) {
+      height: 16px;
+      transform: translateX(-8px) rotate(0deg);
+      width: 2px;
+    }
+  }
+`;
+
+const GroupWatch = styled.div`
+  margin-right: 16px;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+
+  cursor: pointer;
+  div {
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+  }
+  img {
+    width: 100%;
+  }
+`;
+
+const SubTitle = styled.div`
+  color: rgb(249, 249, 249);
+  font-size: 15px;
+  min-height: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+const Description = styled.div`
+  line-height: 1.4;
+  font-size: 20px;
+  padding: 16px 0px;
+  color: rgb(249, 249, 249);
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`;
 const Detail = () => {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          console.log("doc", doc.data());
+          setDetailData(doc.data());
+        } else {
+          console.log("no doc");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
   return (
     <Container>
       <Background>
-        <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/D53D1F5D357587A8D09067AB09FFC7096F837CBAAE02BDC3C0E75814471A1E36/scale?width=1440&aspectRatio=1.78&format=jpeg" />
+        <img src={detailData.backgroundImg} />
       </Background>
       <ImageTitle>
-        <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/37D80C5D1AB0BA65C63588311EC60A07342F60F91D402C28B8E1137AF6A30549/scale?width=1440&aspectRatio=1.78" />
+        <img src={detailData.titleImg} />
       </ImageTitle>
       <ContentMeta>
         <Controls>
           <Player>
             <img src="/images/play-icon-black.png" alt="" />
+            <span>play</span>
           </Player>
+          <Trailer>
+            <img src="/images/play-icon-white.png" alt="" />
+            <span>Trailer</span>
+          </Trailer>
+          <AddList>
+            <span />
+            <span />
+          </AddList>
+          <GroupWatch>
+            <div>
+              <img src="/images/group-icon.png" alt="" />
+            </div>
+          </GroupWatch>
         </Controls>
+        <SubTitle>{detailData.subTitle}</SubTitle>
+        <Description>{detailData.description}</Description>
       </ContentMeta>
     </Container>
   );
