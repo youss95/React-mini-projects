@@ -10,6 +10,7 @@ import ParalleQuery from "./components/ParalleQuery";
 import { DynamicQuery } from "./components/DynamicQuery";
 import DependentQuery from "./components/DependentQuery";
 import { Pagination } from "./components/Pagination";
+import { InfiniteQuery } from "./components/InfiniteQuery";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             path="/dependent"
             element={<DependentQuery email="vishwas@example.com" />}
           />
+          <Route path="/infinite" element={<InfiniteQuery />} />
           <Route path="/paginate" element={<Pagination />} />
           <Route path="/rq-super-heroes" element={<RQSuperHeroes />} />
           <Route path="/rq-super-heroes/:heroId" element={<RQSuperDetail />} />
