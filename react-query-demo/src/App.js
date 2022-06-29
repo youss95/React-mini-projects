@@ -11,6 +11,10 @@ import { DynamicQuery } from "./components/DynamicQuery";
 import DependentQuery from "./components/DependentQuery";
 import { Pagination } from "./components/Pagination";
 import { InfiniteQuery } from "./components/InfiniteQuery";
+import UseState from "./components/UseState";
+import ObjectUseState from "./components/ObjectUseState";
+import ParentOne from "./components/ParentOne";
+import ChildOne from "./components/ChildOne";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -45,6 +49,9 @@ function App() {
           <Route path="/rq-super-heroes/:heroId" element={<RQSuperDetail />} />
           <Route path="/" element={<Home />} />
           <Route path="/parel" element={<ParalleQuery />} />
+          <Route path="/use" element={<UseState />} />
+          <Route path="/objuse" element={<ObjectUseState />} />
+          <Route path="/unnecessary" element={<ParentOne></ParentOne>} />
         </Routes>
       </div>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

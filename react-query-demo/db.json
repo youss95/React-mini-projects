@@ -19,6 +19,31 @@
       "id": 4,
       "name": "Wonder Woman1",
       "alterEgo": "Princess Diana"
+    },
+    {
+      "name": "the falsh",
+      "alterEgo": "abc",
+      "id": 5
+    },
+    {
+      "name": "dfdf",
+      "alterEgo": "ddf",
+      "id": 6
+    },
+    {
+      "name": "aa",
+      "alterEgo": "aa",
+      "id": 7
+    },
+    {
+      "name": "gg",
+      "alterEgo": "gg",
+      "id": 8
+    },
+    {
+      "name": "ads",
+      "alterEgo": "sdsd",
+      "id": 9
     }
   ],
   "friends": [
@@ -44,7 +69,11 @@
   "channels": [
     {
       "id": "codevolution",
-      "courses": ["react", "vue", "angular"]
+      "courses": [
+        "react",
+        "vue",
+        "angular"
+      ]
     }
   ],
   "colors": [
